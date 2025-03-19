@@ -58,7 +58,7 @@ def stft_display(Vx,time_t,fx,zt,zf):
     plt.pcolormesh(time_t,2*np.pi*fx,np.log10(np.abs(Vx)), shading='gouraud', cmap = cmocean.cm.deep)
     plt.scatter(zt,zw,s = 15,color = 'white')
     plt.xlabel(r'$t$ (s)',fontsize = 30)
-    plt.ylabel(r'$\omega$ (rad)',fontsize = 30)
+    plt.ylabel(r'$\omega$ (rad.s$^{-1}$)',fontsize = 30)
     plt.tight_layout()
     
     
