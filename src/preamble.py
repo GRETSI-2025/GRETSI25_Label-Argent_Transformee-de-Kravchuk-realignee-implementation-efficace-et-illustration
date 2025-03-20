@@ -26,11 +26,11 @@ from kravchuk_transform     import the_transform, the_zeros
 from kravchuk_display       import signal_display, planar_display, spherical_display
 from pkravchuk_transform    import the_ptransform
 from ssht_transform         import the_ssht_transform, the_new_transform, the_inverse_transform, rotate_signal
-from spherical_statistics   import the_distance, the_F_statistics, the_K_statistics, empirical_F, empirical_K
-from detection_test         import the_test_statistic, the_test, the_true_statistic, the_global_statistic
+# from spherical_statistics   import the_distance, the_F_statistics, the_K_statistics, empirical_F, empirical_K
+# from detection_test         import the_test_statistic, the_test, the_true_statistic, the_global_statistic
 from stft_transform         import the_stft_transform, the_stft_zeros, stft_display
-from white_noises           import noise_samples
-from window_analysis        import analyze_signal, extract_results
+# from white_noises           import noise_samples
+# from window_analysis        import analyze_signal, extract_results
 
 
 mpl.rcParams['xtick.labelsize'] = 20;
