@@ -22,13 +22,12 @@ from scipy.io                        import wavfile
 
 # LOAD THE FUNCTIONS OF THE KRAVCHUK TOOLBOX
 
-from chirp_signals          import the_chirp, the_gaussian, the_white_noise, the_noisy_chirp, the_noisy_gaussian, the_bird_call, the_noisy_bird
-from chirp_signals          import the_sine, the_noisy_sine, display_signal, display_noisy_and_true, display_signal_and_zoom
-from chirp_signals          import the_dirac, the_noisy_dirac, the_constant, the_noisy_constant
-from kravchuk_display       import planar_display, spherical_display
-from pkravchuk_transform    import the_ptransform
-from ssht_transform         import the_ssht_transform, the_new_transform, the_inverse_transform, rotate_signal
-from stft_transform         import the_stft_transform, stft_display
+from elementary_signals              import the_chirp, the_dirac, the_sine, the_white_noise, the_noisy_chirp, the_noisy_dirac, the_noisy_sine 
+from elementary_signals              import display_signal
+from pkravchuk_transform             import the_ptransform
+from ssht_transform                  import the_ssht_transform, the_new_transform, the_inverse_transform, rotate_signal
+from kravchuk_display                import planar_display, spherical_display
+from stft_transform                  import the_stft_transform, stft_display
 
 
 # HANDLE APPEARANCE OF THE PLOTS
