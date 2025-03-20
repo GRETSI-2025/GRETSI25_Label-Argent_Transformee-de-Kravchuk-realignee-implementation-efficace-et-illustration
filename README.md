@@ -1,11 +1,10 @@
 # A novel aligned Kravchuk transform based on Spin Spherical Harmonics Transform
 
-## Detection methodology based on the zeros of the *Kravchuk* spectrogram  
 
 This project contains the Python code associated to the paper
 
-> **Pascal, B.** & Bardenet, R. (2022). ``*A covariant, discrete time-frequency representation tailored for zero-based signal detection*". Submitted.  
->  [arxiv:2202.03835](https://arxiv.org/abs/2202.03835)
+> **Pascal, B.**, Flamant, J. & Bardenet, R. (2025). ``*Transformée de Kravchuk réalignée, implémentation efficace et illustrations sur quelques signaux élémentaires*". Submitted.  
+>  [hal-]()
 
 ## Project description
 
