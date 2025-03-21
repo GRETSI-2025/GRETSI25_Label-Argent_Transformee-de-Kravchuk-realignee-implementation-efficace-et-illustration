@@ -8,7 +8,11 @@ This project contains the Python code associated to the paper
 
 ## Project description
 
-Following a recently unorthodox path in time-frequency analysis shedding light on the spectrogram zeros, we introduce a novel generalized time-frequency representation, specifically designed for the analysis of *discrete* signals, particularly amenable to spatial statistics on the zeros thanks to its *compact* phase space.  
+Recently, a novel discrete generalized time-frequency transform has been introduced, namely the *Kravchuk transform*, which represents a discrete complex signal by a function on the unit sphere.
+
+Three demonstration notebooks are provided:
+
+- [`demo-kravchuk-bat`](kravchuk-bat-signal.ipynb)
 
 > This toolbox provides a stable implementation of this novel *Kravchuk* transform and the code to reproduce `Figures 1, 2 and 6` of the paper ``*A covariant, discrete time-frequency representation tailored for zero-based signal detection*", comparing the standard and the *Kravchuk* spectrograms of noisy chirps, with a peculiar focus on the zeros.  
 > A demonstration is given in the notebook [`kravchuk-spectrogram-and-zeros`](/demos/kravchuk-spectrogram-and-zeros.ipynb).
@@ -28,3 +32,9 @@ The following Python libraries are necessary:
 - `numpy`
 - `scipy`
 - `pyssht`
+
+## References
+
+[1] Pascal, B., & Bardenet, R. (2022). A covariant, discrete time-frequency representation tailored for zero-based signal detection. *IEEE Transactions on Signal Processing*, 70, 2950–2961.
+
+[2] Pascal, B., & Bardenet, R. (2022, September). Une famille de représentations covariantes de signaux discrets et son application à la détection de signaux à partir de leurs zéros. *GRETSI’22 XXVIIIème Colloque Francophone De Traitement Du Signal Et Des Images*.
