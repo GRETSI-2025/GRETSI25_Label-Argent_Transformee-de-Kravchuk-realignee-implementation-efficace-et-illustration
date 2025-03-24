@@ -1,4 +1,4 @@
-name: test installation of repository with poetry
+name: Install w/ Poetry
 
 on: [push, pull_request]
 
