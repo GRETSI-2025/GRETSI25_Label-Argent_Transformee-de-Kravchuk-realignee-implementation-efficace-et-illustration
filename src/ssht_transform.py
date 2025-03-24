@@ -147,3 +147,22 @@ def the_inverse_transform(f,N,method = 'MW'):
             x[n]       = np.conj(flm[index])
         
     return x, thetas, phis
+
+
+def the_spherical_angles(N, method = 'MW'):
+    '''
+    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    '''
+    
+    # largest index explored
+    ell = int(N/2)
+    
+    # band-limit 
+    L   = ell + 1
+    
+    (thetas, phis) = ssht.sample_positions(L, Method=method)
+
+    # adjust the azimuthal angle to fit the aligned transform definition
+    phis           = phis - np.pi
+    
+    return thetas, phis
