@@ -24,7 +24,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .venv
-        key: venv-requirements-${{ runner.os }}-${{ hashFiles('.github/actions/install-env/action.yml') }}-${{ steps.setup-python.outputs.python-version }}
+        key: venvdotrequirements-${{ runner.os }}-${{ hashFiles('.github/actions/install-env/action.yml') }}-${{ steps.setup-python.outputs.python-version }}
 
     - name: Load cached .local
       id: cached-dotlocal
