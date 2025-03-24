@@ -3,6 +3,7 @@
 import numpy             as np
 import matplotlib.pyplot as plt
 import numpy.random      as npr
+import scipy.special     as special
 import cmocean 
 
 
@@ -80,6 +81,25 @@ def the_dirac(N,observe = 20,location = 0):
     return signal, time_t
     
     
+def the_coherent_state(N,observe = 20,theta = np.pi/2, phi = 0):
+    
+    """
+    Coherent state for the aligned Kravchuk transform parameterized by the spherical angles (theta,phi)
+    """
+    
+    # N+1: number of samples
+    # observe: total duration of the measurement
+    # theta: polar angle indexing the coherent state in [0, pi]
+    # phi: azimuthal angle indexing the coherent state in [-pi, pi]
+    
+    
+    time_t   = np.linspace(-observe, observe, N+1)
+    ns       = np.arange(N+1)
+    signal   = np.sqrt(N + 1)/ (4 * np.pi) * np.exp(1/2 * special.loggamma(N+1) - 1/2 *special.loggamma(ns+1) - 1/2 *special.loggamma(N-ns+1)) * np.cos(theta / 2)**(N-ns) * np.sin(theta /2)**(ns) * np.exp(-1j * (phi + np.pi) * ns)
+    signal  /= np.linalg.norm(signal,ord=2)
+        
+    return signal, time_t
+
 
 # PURE NOISE
 
@@ -164,6 +184,33 @@ def the_noisy_dirac(N,snr = 1,observe=20,location=0,disp = False):
     # location: position of the Dirac mass
     
     signal, time_t = the_dirac(N,observe,location)
+    
+    wnoise = the_white_noise(N)
+    
+    if snr > 0:
+        nsignal = signal + 1/snr*wnoise
+    else:
+        nsignal = wnoise
+        
+    if disp:
+        display_signal(nsignal,time_t)
+        
+    return nsignal, time_t
+
+
+def the_noisy_coherent_state(N,snr = 1,observe = 20,theta = np.pi/2, phi = 0,disp = False):
+    
+    """
+    Coherent state for the aligned Kravchuk transform parameterized by the spherical angles (theta,phi)
+    """
+    
+    # N+1: number of samples
+    # snr: signal-to-noise ratio
+    # observe: total duration of the measurement
+    # theta: polar angle indexing the coherent state in [0, pi]
+    # phi: azimuthal angle indexing the coherent state in [-pi, pi]
+
+    signal, time_t = the_coherent_state(N,observe,theta,phi)
     
     wnoise = the_white_noise(N)
     
