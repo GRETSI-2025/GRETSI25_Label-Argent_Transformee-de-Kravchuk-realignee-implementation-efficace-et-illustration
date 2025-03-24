@@ -57,4 +57,5 @@ jobs:
 
     - name: run preamble to test
       run: |
+        poetry install
         poetry run python src/preamble.py
