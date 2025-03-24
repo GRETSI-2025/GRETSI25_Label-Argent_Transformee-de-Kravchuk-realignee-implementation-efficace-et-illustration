@@ -1,11 +1,12 @@
 import numpy             as np
 import numpy.random      as npr
 import scipy.special     as sps
-from   matplotlib.pyplot import figure
 import matplotlib.pyplot as plt
 import matplotlib        as mpl
 import math
 import cmocean
+
+from   matplotlib.pyplot import figure
 
 sapin  = (0.0353, 0.3216, 0.1569)
 tendre = (0.106, 0.463 , 0.827)

@@ -4,6 +4,8 @@ import scipy.fft         as fft
 import matplotlib.pyplot as plt
 import cmocean
 
+from   matplotlib.pyplot import figure
+
 def the_stft_transform(x, time_t=[]):
     
     """
@@ -54,7 +56,8 @@ def stft_display(Vx,time_t,fx,zt,zf):
 
     # turn to pulsation for display
     zw = 2*np.pi*np.array(zf)
-    
+
+    figure(figsize = (7.5,4));
     plt.pcolormesh(time_t,2*np.pi*fx,np.log10(np.abs(Vx)), shading='gouraud', cmap = cmocean.cm.deep)
     plt.scatter(zt,zw,s = 15,color = 'white')
     plt.xlabel(r'$t$ (s)',fontsize = 30)
