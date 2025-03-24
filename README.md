@@ -12,11 +12,11 @@ Recently, a novel discrete generalized time-frequency transform has been introdu
 
 Three demonstration notebooks are provided:
 
-- [`kravchuk-elementary-signals`](kravchuk-elementary-signals.ipynb)
+- [`kravchuk-elementary-signals`](notebooks/kravchuk-elementary-signals.ipynb)
 
 > *Illustrates the novel aligned Kravchuk transform on several elementary signals, namely a Dirac delta, a pure sine, a chirp and a coherent state, reproducing `Figure 4` of the paper.*
 > 
-- [`kravchuk-bat-signal`](kravchuk-bat-signal.ipynb)
+- [`kravchuk-bat-signal`](notebooks/kravchuk-bat-signal.ipynb)
 
 > *Loads a real recording of bat call used for echolocation and compare its Kravchuk and Fourier spectrograms reproducing `Figure 5` of the paper.*
 
