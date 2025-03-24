@@ -1,5 +1,5 @@
-[![Install with poetry](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml)
-[![Install with requirements.txt](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml)
+[![Poetry](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml)
+[![Requirements.txt](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml)
 
 # A novel aligned Kravchuk transform based on Spin Spherical Harmonics Transform
 
