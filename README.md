@@ -1,3 +1,4 @@
+[![Install with poetry](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml)
 # A novel aligned Kravchuk transform based on Spin Spherical Harmonics Transform
 
 
