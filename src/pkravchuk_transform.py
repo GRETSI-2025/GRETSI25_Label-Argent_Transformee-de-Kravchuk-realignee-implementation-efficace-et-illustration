@@ -1,7 +1,25 @@
+# LOAD NECESSARY PYTHON LIBRARIES
+
 import numpy         as np
 import scipy.special as sps
 
 def the_ptransform(x, p = 0.5, thetas = np.linspace(1e-10,np.pi,500), phis = np.linspace(0,2*np.pi,500)):
+
+    """
+    Compute the p-Kravchuk transform of a discrete signal.
+
+    Args:
+        - x (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
+        - p (float, optional): parameter of the transform between 0 and 1 (default 0.5 corresponding to the original transform).
+        - thetas (numpy.ndarray, optional): polar angles at which to compute the transform.
+        - phis (numpy.ndarray, optional): azimuthal angles at which to compute the transform.
+
+    Returns:
+        - Ks (numpy.ndarray): p-Kravchuk transform, complex-valued, evaluated at a discrete set of points on the sphere.
+        - thetas (numpy.ndarray): polar angles at which the transform is computed.
+        - phis (numpy.ndarray): azimuthal angles at which the transform is computed.
+        
+    """
 
     N  = x.shape[0] - 1
     q  = np.sqrt(p/(1-p))

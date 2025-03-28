@@ -285,7 +285,7 @@ def display_signal(nsignal,time_t=np.array([]), yticks=True):
     Display the real part of a signal with respect to time.
 
     Args:
-        - nsignal (numpy.ndarray): discrete signal, noisy or not, possibly complex valued
+        - nsignal (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
         - time_t (numpy.ndarray, optional): vector of time stamps at which the signal is sampled.
         - yticks (boolean, optional): if true display the tick labels on y-axis.
 
