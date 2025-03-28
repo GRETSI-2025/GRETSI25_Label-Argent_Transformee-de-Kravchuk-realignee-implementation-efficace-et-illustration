@@ -21,14 +21,19 @@ my_green = my_green[:3]
 def the_chirp(N,observe = 20,duration = 15):
     
     """
-    chirp of unit energy for the 2-norm
+    Chirp of unit energy for the 2-norm.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - observe (float): total duration of the observation window (in seconds).
+        - duration (float): duration of the phenomenon of interest (in seconds).
+
+    Returns:
+        - signal (numpy.ndarray): discrete signal corresponding to the regular sampling of a chirp.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
+    
     """
-    
-    # N+1: number of samples
-    # observe: total duration of the measurement
-    # duration: duration of the phenomenon of interest
-    
-    
+
     time_t   = np.linspace(-observe, observe, N+1)
     envelop  = np.zeros(N+1)
     envelop[np.abs(time_t)<duration] = np.exp(-25/(duration**2-time_t[np.abs(time_t)<duration]**2))
@@ -36,7 +41,6 @@ def the_chirp(N,observe = 20,duration = 15):
     chirp    = np.sin(2*np.pi*freq*time_t)
     signal   = chirp*envelop
     signal   /= np.linalg.norm(signal,ord=2)
-
         
     return signal, time_t
     
@@ -44,18 +48,22 @@ def the_chirp(N,observe = 20,duration = 15):
 def the_sine(N,observe = 20,frequency = 1):
     
     """
-    chirp of unit energy for the 2-norm
+    Pure sine of unit energy for the 2-norm.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - observe (float): total duration of the observation window (in seconds).
+        - frequency (float): frequency of the pure sine (in Hertz).
+
+    Returns:
+        - signal (numpy.ndarray): discrete signal corresponding to the regular sampling of a pure sine.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
+    
     """
-    
-    # N+1: number of samples
-    # observe: total duration of the measurement
-    # frequency: frequency of the pure sine
-    
     
     time_t   = np.linspace(-observe, observe, N+1)
     signal    = np.sin(2*np.pi*frequency*time_t)
     signal   /= np.linalg.norm(signal,ord=2)
-
         
     return signal, time_t
 
@@ -63,20 +71,24 @@ def the_sine(N,observe = 20,frequency = 1):
 def the_dirac(N,observe = 20,location = 0):
     
     """
-    Dirac mass of unit energy localized at a given time
+    Dirac mass of unit energy for the 2-norm.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - observe (float): total duration of the observation window (in seconds).
+        - location (float): location of the Dirac mass (in seconds).
+
+    Returns:
+        - signal (numpy.ndarray): discrete signal corresponding to a Dirac mass at a fixed position.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
+    
     """
-    
-    # N+1: number of samples
-    # observe: total duration of the measurement
-    # location: position of the Dirac mass
-    
     
     time_t         = np.linspace(-observe, observe, N+1)
     signal         = np.zeros(np.shape(time_t))
     loc            = np.argwhere(np.abs(time_t - location) == np.min(np.abs(time_t - location)))
     signal[loc[0]] = 1
     signal        /= np.linalg.norm(signal,ord=2)
-
         
     return signal, time_t
     
@@ -84,14 +96,22 @@ def the_dirac(N,observe = 20,location = 0):
 def the_coherent_state(N,observe = 20,theta = np.pi/2, phi = 0):
     
     """
-    Coherent state for the aligned Kravchuk transform parameterized by the spherical angles (theta,phi)
+    Coherent state of unit energy for the 2-norm.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - observe (float): total duration of the observation window (in seconds).
+        - theta (float): polar angle indicating the position of the coherent state on the sphere (between 0 and pi).
+        - phi (float): aligned azimuthal angle indicating the position of the coherent state on the sphere (between -pi and pi).
+
+    Returns:
+        - signal (numpy.ndarray): discrete signal corresponding to the regular sampling of a coherent state.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
+    
     """
-    
-    # N+1: number of samples
-    # observe: total duration of the measurement
-    # theta: polar angle indexing the coherent state in [0, pi]
-    # phi: azimuthal angle indexing the coherent state in [-pi, pi]
-    
+
+    if theta < 0 || theta > np.pi:
+        error('')
     
     time_t   = np.linspace(-observe, observe, N+1)
     ns       = np.arange(N+1)
@@ -106,10 +126,15 @@ def the_coherent_state(N,observe = 20,theta = np.pi/2, phi = 0):
 def the_white_noise(N):
     
     """
-    complex white Gaussian noise of length N+1 normalized for the 2-norm
-    """
+    Complex white Gaussian noise normalized for the 2-norm.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        
+    Returns:
+        - wnoise (numpy.ndarray): discrete white noise generated as a standard Gaussian vector of size N+1.
     
-    # N+1: number of samples
+    """
     
     wnoise = (np.random.randn(N+1)+1j*np.random.randn(N+1))/np.sqrt(2)
     wnoise /= np.linalg.norm(wnoise,ord=2)
@@ -117,19 +142,25 @@ def the_white_noise(N):
     return wnoise
 
 
-
 # NOISY SIGNALS
 
 def the_noisy_chirp(N,snr = 1,observe=20,duration=15,disp = False):
     
-    """
-    noisy chirp
-    """
+     """
+    Chirp of unit energy for the 2-norm with additive Gaussian noise of unit energy for the 2-norm with fixed signal-to-noise ratio.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - snr (float): signal-to-noisy ratio (nonnegative, if Inf no noise).
+        - observe (float): total duration of the observation window (in seconds).
+        - duration (float): duration of the phenomenon of interest (in seconds).
+        - disp (boolean, optional): if true display the generated signal.
+
+    Returns:
+        - nsignal (numpy.ndarray): discrete signal corresponding to the regular sampling of a noisy chirp.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
     
-    # N+1: number of samples
-    # snr: signal-to-noise ratio
-    # observe: total duration of the measurement
-    # duration: duration of the phenomenon of interest
+    """
     
     signal, time_t = the_chirp(N,observe,duration)
     
@@ -149,13 +180,20 @@ def the_noisy_chirp(N,snr = 1,observe=20,duration=15,disp = False):
 def the_noisy_sine(N,snr = 1,observe=20,frequency=1,disp = False):
     
     """
-    noisy sine
-    """
+    Pure sine of unit energy for the 2-norm with additive Gaussian noise of unit energy for the 2-norm with fixed signal-to-noise ratio.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - snr (float): signal-to-noisy ratio (nonnegative, if Inf no noise).
+        - observe (float): total duration of the observation window (in seconds).
+        - frequency (float): frequency of the pure sine (in Hertz).
+        - disp (boolean, optional): if true display the generated signal.
+
+    Returns:
+        - nsignal (numpy.ndarray): discrete signal corresponding to the regular sampling of a noisy sine.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
     
-    # N+1: number of samples
-    # snr: signal-to-noise ratio
-    # observe: total duration of the measurement
-    # frequency: frequency of the pure sine
+    """
     
     signal, time_t = the_sine(N,observe,frequency)
     
@@ -175,13 +213,20 @@ def the_noisy_sine(N,snr = 1,observe=20,frequency=1,disp = False):
 def the_noisy_dirac(N,snr = 1,observe=20,location=0,disp = False):
     
     """
-    noisy dirac
-    """
+    Dirac mass of unit energy for the 2-norm with additive Gaussian noise of unit energy for the 2-norm with fixed signal-to-noise ratio.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - snr (float): signal-to-noisy ratio (nonnegative, if Inf no noise).
+        - observe (float): total duration of the observation window (in seconds).
+        - location (float): location of the Dirac mass (in seconds).
+        - disp (boolean, optional): if true display the generated signal.
+
+    Returns:
+        - nsignal (numpy.ndarray): discrete signal corresponding to a Dirac mass at a fixed position with additive Gaussian noise.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
     
-    # N+1: number of samples
-    # snr: signal-to-noise ratio
-    # observe: total duration of the measurement
-    # location: position of the Dirac mass
+    """
     
     signal, time_t = the_dirac(N,observe,location)
     
@@ -201,14 +246,21 @@ def the_noisy_dirac(N,snr = 1,observe=20,location=0,disp = False):
 def the_noisy_coherent_state(N,snr = 1,observe = 20,theta = np.pi/2, phi = 0,disp = False):
     
     """
-    Coherent state for the aligned Kravchuk transform parameterized by the spherical angles (theta,phi)
-    """
+    Coherent state of unit energy for the 2-norm with additive Gaussian noise of unit energy for the 2-norm with fixed signal-to-noise ratio.
+
+    Args:
+        - N (integer): the number of samples in the generated signal will be N+1.
+        - snr (float): signal-to-noisy ratio (nonnegative, if Inf no noise).
+        - observe (float): total duration of the observation window (in seconds).
+        - theta (float): polar angle indicating the position of the coherent state on the sphere (between 0 and pi).
+        - phi (float): aligned azimuthal angle indicating the position of the coherent state on the sphere (between -pi and pi).
+        - disp (boolean, optional): if true display the generated signal.
+
+    Returns:
+        - nsignal (numpy.ndarray): discrete signal corresponding to the regular sampling of a noisy coherent state.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled.
     
-    # N+1: number of samples
-    # snr: signal-to-noise ratio
-    # observe: total duration of the measurement
-    # theta: polar angle indexing the coherent state in [0, pi]
-    # phi: azimuthal angle indexing the coherent state in [-pi, pi]
+    """
 
     signal, time_t = the_coherent_state(N,observe,theta,phi)
     
@@ -230,12 +282,17 @@ def the_noisy_coherent_state(N,snr = 1,observe = 20,theta = np.pi/2, phi = 0,dis
 def display_signal(nsignal,time_t=np.array([]), yticks=True):
                    
     """
-    display the real part of a signal along time
+    Display the real part of a signal with respect to time.
+
+    Args:
+        - nsignal (numpy.ndarray): discrete signal, noisy or not, possibly complex valued
+        - time_t (numpy.ndarray, optional): vector of time stamps at which the signal is sampled.
+        - yticks (boolean, optional): if true display the tick labels on y-axis.
+
+    Returns:
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is displayed.
+        
     """
-    
-    # nsignal: complex signal to be analyzed of length N+1
-    # time_t: (optional) time range of observation (default: [0,1, ...,N])
-    # yticks: (optional) if false remove the ticks on the y axis
     
     if len(time_t) == 0:
         time_t = np.arange(len(nsignal))
