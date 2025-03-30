@@ -1,8 +1,13 @@
+# LOAD NECESSARY PYTHON LIBRARIES
+
 import numpy as np
 import scipy.signal as signal
 import scipy.fft as fft
 import matplotlib.pyplot as plt
 import cmocean
+
+
+# LOAD NECESSARY PYTHON FUNCTIONS
 
 from matplotlib.pyplot import figure
 

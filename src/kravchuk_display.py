@@ -1,8 +1,13 @@
+# LOAD NECESSARY PYTHON LIBRARIES
+
 import numpy as np
 import numpy.random as npr
 import matplotlib.pyplot as plt
 import math
 import cmocean
+
+
+# LOAD NECESSARY PYTHON FUNCTIONS
 
 from matplotlib.pyplot import figure
 
@@ -11,23 +16,32 @@ tendre = (0.106, 0.463, 0.827)
 tclair = (0.776, 0.866, 0.957)
 
 
-def signal_display(time_t, nsignal):
-    plt.subplots(figsize=(5, 3))
-    plt.plot(time_t, nsignal, color=c[2, :], linewidth=1)
-    plt.grid()
-    plt.xlabel("$t$ (s)")
-    plt.tight_layout()
-
+# PLANAR DISPLAY
 
 def planar_display(
     Kz,
-    zt,
-    zp,
+    zt=[],
+    zp=[],
     thetas=np.linspace(1e-10, np.pi, 500),
     phis=np.linspace(0, 2 * np.pi, 500),
     new=True,
 ):
-    # Display the spectrogram and its zeros
+    
+    """
+    Display the Kravchuk spectrogram of a discrete signal on a planar surface.
+
+    Args:
+        - Kz (numpy.ndarray): Kravchuk transform (in general complex valued).
+        - zt (list of float,optional): polar angles of the zeros of the Kravchuk transform.
+        - zp (numpy.ndarray, optional): azimuthal angles of the zeros of the Kravchuk transform.
+        - thetas (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
+        - phis (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
+        - new (boolean,optional): if True adapt the ticks to the new transform.
+    """
+
+    if not np.shape(Kz) == (len(thetas),len(phis)):
+        raise NameError("The lengths of thetas and phis do not match the size of the Kravchuk transform.") 
+    
     figure(figsize=(6, 4))
     plt.pcolormesh(
         thetas, phis, np.log10(np.abs(Kz)).T, shading="gouraud", cmap=cmocean.cm.deep
@@ -44,14 +58,32 @@ def planar_display(
     plt.tight_layout()
 
 
+# SPHERICAL DISPLAY
+
 def spherical_display(
     Kz,
-    zt,
-    zp,
+    zt=[],
+    zp=[],
     thetas=np.linspace(1e-10, np.pi, 500),
     phis=np.linspace(0, 2 * np.pi, 500),
     size=150,
 ):
+
+    """
+    Display the Kravchuk spectrogram of a discrete signal on the sphere.
+
+    Args:
+        - Kz (numpy.ndarray): Kravchuk transform (in general complex valued).
+        - zt (list of float,optional): polar angles of the zeros of the Kravchuk transform.
+        - zp (numpy.ndarray, optional): azimuthal angles of the zeros of the Kravchuk transform.
+        - thetas (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
+        - phis (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
+        - size (float,optional): size of the markers indicating zeros.
+    """
+
+    if not np.shape(Kz) == (len(thetas),len(phis)):
+        raise NameError("The lengths of thetas and phis do not match the size of the Kravchuk transform.") 
+        
     # maps of angles
     Thetas, Phis = np.meshgrid(thetas, phis, indexing="ij")
 

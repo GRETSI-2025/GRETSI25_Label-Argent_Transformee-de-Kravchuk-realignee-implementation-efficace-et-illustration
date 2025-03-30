@@ -1,10 +1,22 @@
+# LOAD NECESSARY PYTHON LIBRARIES
+
 import numpy as np
 import pyssht as ssht
 
 
 def the_ssht_transform(x, method="MW", p=1 / 2):
     """
-    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    Compute the p-Kravchuk transform of a discrete signal leveraging the connection with Spin Weighted Spherical Harmonics.
+
+    Args:
+        - x (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
+        - method (string, optional): method of decomposition to use in pyssht (default "MW" for McEwen & Wiaux sampling).
+        - p (float, optional): parameter of the transform between 0 and 1 (default 0.5 corresponding to the original transform).
+
+    Returns:
+        - f (numpy.ndarray): p-Kravchuk transform, complex-valued, evaluated at a discrete set of points on the sphere.
+        - thetas (numpy.ndarray): polar angles at which the transform is computed.
+        - phis (numpy.ndarray): azimuthal angles at which the transform is computed.
     """
 
     N = x.shape[0] - 1
@@ -45,8 +57,23 @@ def the_ssht_transform(x, method="MW", p=1 / 2):
 
 def rotate_signal(x, theta=0, phi=0, method="MW"):
     """
-    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    Rotate a signal leveraging the connection with Spin Weighted Spherical Harmonics.
+
+    Args:
+        - x (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
+        - theta (float, optional): polar angle of the rotation of the signal (default 0).
+        - phi (float, optional): azimuthal angle of the rotation of the signal (default 0).
+        - method (string, optional): method of decomposition to use in pyssht (default "MW" for McEwen & Wiaux sampling).
+
+    Returns:
+        - y (numpy.ndarray): rotated signal.
     """
+
+    if theta < 0 or theta > np.pi:
+        raise NameError("The polar angle theta should be between 0 and pi.")
+
+    if phi < -np.pi or theta > np.pi:
+        raise NameError("The azimuthal angle phi should be between -pi and pi.")
 
     N = x.shape[0] - 1
 
@@ -81,7 +108,16 @@ def rotate_signal(x, theta=0, phi=0, method="MW"):
 
 def the_new_transform(x, method="MW"):
     """
-    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    Compute the novel aligned Kravchuk transform of a discrete signal defined as an expansion on Spin Weighted Spherical Harmonics.
+
+    Args:
+        - x (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
+        - method (string, optional): method of decomposition to use in pyssht (default "MW" for McEwen & Wiaux sampling).
+
+    Returns:
+        - f (numpy.ndarray): novel aligned Kravchuk transform, complex-valued, evaluated at a discrete set of points on the sphere.
+        - thetas (numpy.ndarray): polar angles at which the transform is computed.
+        - phis (numpy.ndarray): azimuthal angles at which the transform is computed.
     """
 
     N = x.shape[0] - 1
