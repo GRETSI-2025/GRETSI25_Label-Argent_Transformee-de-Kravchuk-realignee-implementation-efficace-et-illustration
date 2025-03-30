@@ -27,13 +27,61 @@ Three demonstration notebooks are provided:
 
 > *Generate an elementary signal and compare its original and novel aligned Kravchuk spectrograms reproducing `Figure 1` of the paper. Also enable to rotate the signals.*
 
-## Dependencies
+## Installation Instructions
 
-The following Python libraries are necessary:
-- `matplotlib`
-- `numpy`
-- `scipy`
-- `pyssht`
+### Using Poetry (recommended)
+
+Poetry is a dependency manager for Python that simplifies package management. To install dependencies using Poetry, follow these steps:
+
+1. Ensure [Poetry](https://python-poetry.org/docs/) (v2.0+) is installed. If not, install it using:
+   ```sh
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+   Or, if you already have Poetry, update it:
+   ```sh
+   poetry self update
+   ```
+
+2. Navigate to your project directory:
+   ```sh
+   cd /path/to/your/project
+   ```
+
+3. Install dependencies from `pyproject.toml`:
+   ```sh
+   poetry install
+   ```
+   The installation will automatically create a virtual environment ``.venv/``in the same folder, that you can use for running files in ``notebooks/``.
+
+### Using requirements.txt
+
+If you do want to use Poetry, installation is also possible using the proposed `requirements.txt` file.
+Follow these steps:
+
+1. Ensure you have Python and pip installed. You can check by running:
+   ```sh
+   python3 --version
+   pip --version
+   ```
+
+2. Navigate to your project directory:
+   ```sh
+   cd /path/to/your/project
+   ```
+
+3. Create and activate a virtual environment (recommended):
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
+
+4. Install dependencies from `requirements.txt`:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+You're now ready to compute Kravchuk transforms! 🚀
+
 
 ## References
 
