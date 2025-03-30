@@ -153,7 +153,15 @@ def the_new_transform(x, method="MW"):
 
 def the_inverse_transform(f, N, method="MW"):
     """
-    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    Compute the inverse of the novel aligned Kravchuk transform of a discrete signal defined as an expansion on Spin Weighted Spherical Harmonics.
+
+    Args:
+        - f (numpy.ndarray): novel aligned Kravchuk transform, complex-valued, evaluated at a discrete set of points on the sphere.
+        - N (even integer): size of the original signal to be retrieved from its Kravchuk transform will be N+1.
+        - method (string, optional): method of decomposition to use in pyssht (default "MW" for McEwen & Wiaux sampling).
+
+    Returns:
+        - x (numpy.ndarray): discrete signal having as aligned Kravchuk transform f.
     """
 
     if np.mod(N, 2):
@@ -165,9 +173,6 @@ def the_inverse_transform(f, N, method="MW"):
         # band-limit
         L = ell + 1
 
-        # spherical coordinates of the pixel centers used by the SSHT toolbox
-        (thetas, phis) = ssht.sample_positions(L, Method=method)  # vectors
-
         # compute the SSHT transform which coincides with the new Kravchuk inverse transform
         flm = ssht.forward(f, L, Spin=ell, Method=method)
 
@@ -178,12 +183,20 @@ def the_inverse_transform(f, N, method="MW"):
             index = ssht.elm2ind(ell, m)
             x[n] = np.conj(flm[index])
 
-    return x, thetas, phis
+    return x
 
 
 def the_spherical_angles(N, method="MW"):
     """
-    Default method in SSH toolbox https://pypi.org/project/pyssht/ is 'MW' for McEwen & Wiaux sampling.
+    Indicate the spherical angles at which the novel aligned Kravchuk transform of a signal is evaluated leveraging the pyssht library.
+
+    Args:
+        - N (even integer): size of the analyzed signal is N+1.
+        - method (string, optional): method of decomposition to use in pyssht (default "MW" for McEwen & Wiaux sampling).
+
+    Returns:
+        - thetas (numpy.ndarray): polar angles at which the transform is computed.
+        - phis (numpy.ndarray): azimuthal angles at which the transform is computed.
     """
 
     # largest index explored
