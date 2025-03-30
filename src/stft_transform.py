@@ -14,11 +14,17 @@ from matplotlib.pyplot import figure
 
 def the_stft_transform(x, time_t=[]):
     """
-    standard Short-Time Fourier Transform with a circular Gaussian window
-    """
+    Compute the discretized standard Short-Time Fourier Transform with a circular Gaussian window.
 
-    # x:      complex signal to be analyzed with N+1 samples
-    # time_t: time_t: (optional) time range of observation (default: [0,1, ...,N])
+    Args:
+        - x (numpy.ndarray): discrete signal, noisy or not, possibly complex valued.
+        - time_t (numpy.ndarray, optional): vector of time stamps at which the signal is sampled (default: [0,1, ...,N]).
+
+    Returns:
+        - Vx (numpy.ndarray): Short-Time Fourier Transform of the discrete signal, complex-valued.
+        - fx (numpy.ndarray): frequencies at which the Short-Time Fourier transform is computed.
+        - time_t (numpy.ndarray): time stamps at which the Short-Time Fourier transform is computed.
+    """
 
     if len(time_t) == 0:
         time_t = np.arange(len(x)) - int(len(x) // 2)
@@ -40,10 +46,24 @@ def the_stft_transform(x, time_t=[]):
     fx = fft.fftshift(fx)
     Vx = fft.fftshift(Vx, axes=(0,))
 
-    return Vx, fx
+    return Vx, time_t, fx
 
 
 def the_stft_zeros(Vx, time_t, fx, feedback=False):
+    """
+    Localize the zeros of the Short-Time Fourier Transform.
+
+    Args:
+        - Vx (numpy.ndarray): Short-Time Fourier Transform of the discrete signal, complex-valued.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled (default: [0,1, ...,N]).
+        - fx (numpy.ndarray): frequencies at which the Short-Time Fourier transform is computed.
+        - feedback (boolean, optional): if True print the number of detected zeros.
+
+    Returns:
+        - zt (list of float): time coordinates of the zeros of the Gaussian spectrogram.
+        - zf (list of float): frequency coordinates of the zeros of the Gaussian spectrogram.
+    """
+    
     # compute the zeros
     zx, zy = extr2min(np.abs(Vx))
 
@@ -58,7 +78,19 @@ def the_stft_zeros(Vx, time_t, fx, feedback=False):
     return zt, zf
 
 
-def stft_display(Vx, time_t, fx, zt, zf):
+def stft_display(Vx, time_t, fx, zt=[], zf=[]):
+
+    """
+    Display the standard Gaussian spectrogram and its zeros.
+
+    Args:
+        - Vx (numpy.ndarray): Short-Time Fourier Transform of the discrete signal, complex-valued.
+        - time_t (numpy.ndarray): vector of time stamps at which the signal is sampled (default: [0,1, ...,N]).
+        - fx (numpy.ndarray): frequencies at which the Short-Time Fourier transform is computed.
+        - zt (list of float, optional): time coordinates of the zeros of the Gaussian spectrogram.
+        - zf (list of float, optional): frequency coordinates of the zeros of the Gaussian spectrogram.
+    """
+    
     # turn to pulsation for display
     zw = 2 * np.pi * np.array(zf)
 
@@ -77,10 +109,18 @@ def stft_display(Vx, time_t, fx, zt, zf):
 
 
 def extr2min(M):
-    """
-    find spectrogram zeros by the Minimal Grid Neighbors method
-    """
 
+    """
+    Find zeros of a nonnegative function by the Minimal Grid Neighbors method.
+
+    Args:
+        - M (numpy.ndarray): two-dimensional array of nonnegative real numbers.
+
+    Returns:
+        - x (list of integers): x-indices of the zeros of the input matrix.
+        - y (list of intergers): y-indices of the zeros of the input matrix.
+    """
+    
     central = M[1:-1, 1:-1]
     mask = np.full(central.shape, True, dtype=bool)
     sub_indices = (

@@ -33,7 +33,7 @@ def planar_display(
     Args:
         - Kz (numpy.ndarray): Kravchuk transform (in general complex valued).
         - zt (list of float,optional): polar angles of the zeros of the Kravchuk transform.
-        - zp (numpy.ndarray, optional): azimuthal angles of the zeros of the Kravchuk transform.
+        - zp (list of float, optional): azimuthal angles of the zeros of the Kravchuk transform.
         - thetas (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
         - phis (numpy.ndarray, optional): azimuthal angles at which the transform is computed.
         - new (boolean,optional): if True adapt the ticks to the new transform.

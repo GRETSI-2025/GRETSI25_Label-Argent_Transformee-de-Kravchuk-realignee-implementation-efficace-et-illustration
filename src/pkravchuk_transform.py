@@ -20,7 +20,6 @@ def the_ptransform(
         - Ks (numpy.ndarray): p-Kravchuk transform, complex-valued, evaluated at a discrete set of points on the sphere.
         - thetas (numpy.ndarray): polar angles at which the transform is computed.
         - phis (numpy.ndarray): azimuthal angles at which the transform is computed.
-
     """
 
     N = x.shape[0] - 1
