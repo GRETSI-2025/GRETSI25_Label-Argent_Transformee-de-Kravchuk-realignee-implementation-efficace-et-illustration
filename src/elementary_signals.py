@@ -109,7 +109,10 @@ def the_coherent_state(N, observe=20, theta=np.pi / 2, phi=0):
     """
 
     if theta < 0 or theta > np.pi:
-        error("")
+        error("The polar angle theta should be between 0 and pi.")
+
+    if phi < -np.pi or theta > np.pi:
+        error("The azimuthal angle phi should be between -pi and pi.")
 
     time_t = np.linspace(-observe, observe, N + 1)
     ns = np.arange(N + 1)
