@@ -7,7 +7,7 @@ sys.path.append("../src")
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+import time
 
 # IMPORT USEFUL FUNCTIONS
 
