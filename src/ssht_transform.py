@@ -69,12 +69,6 @@ def rotate_signal(x, theta=0, phi=0, method="MW"):
         - y (numpy.ndarray): rotated signal.
     """
 
-    if theta < 0 or theta > np.pi:
-        raise NameError("The polar angle theta should be between 0 and pi.")
-
-    if phi < -np.pi or theta > np.pi:
-        raise NameError("The azimuthal angle phi should be between -pi and pi.")
-
     N = x.shape[0] - 1
 
     if np.mod(N, 2):
