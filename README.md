@@ -25,9 +25,9 @@ Three demonstration notebooks are provided:
 
 - [`kravchuk-aligned-transform`](notebooks/kravchuk-aligned-transform.ipynb)
 
-> *Generate an elementary signal and compare its original and novel aligned Kravchuk spectrograms reproducing `Figure 1` of the paper if the signal is chosen to be the **chirp** with `snr = Inf`.
-> Compare the computational load of the original and the novel aligned Kravchuk transform as reported in `Figure 3` (top).
-> Evaluated the precision of the implementation of the aligned Kravchuk transform and of its inverse as reported in `Figure 3` (bottom).
+> *Generate an elementary signal and compare its original and novel aligned Kravchuk spectrograms reproducing `Figure 1` of the paper if the signal is chosen to be the **chirp** with `snr = Inf`.  
+> Compare the computational load of the original and the novel aligned Kravchuk transform as reported in `Figure 3` (top).  
+> Evaluated the precision of the implementation of the aligned Kravchuk transform and of its inverse as reported in `Figure 3` (bottom).  
 > Exemplify the rotation of a signal.*
 
 ## Installation Instructions
