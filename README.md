@@ -18,12 +18,12 @@ Three demonstration notebooks are provided:
 - [`kravchuk-elementary-signals`](notebooks/kravchuk-elementary-signals.ipynb)
 
 > *Illustrates the novel aligned Kravchuk transform on several elementary signals, namely a Dirac delta, a pure sine, a chirp and a coherent state, reproducing `Figure 4` of the paper.*
-> 
+ 
 - [`kravchuk-bat-signal`](notebooks/kravchuk-bat-signal.ipynb)
 
 > *Loads a real recording of bat call used for echolocation and compare its Kravchuk and Fourier spectrograms reproducing `Figure 5` of the paper.*
->
-> - [`kravchuk-aligned-signal`](notebooks/kravchuk-aligned-signal.ipynb)
+
+- [`kravchuk-aligned-signal`](notebooks/kravchuk-aligned-signal.ipynb)
 
 > *Generate an elementary signal and compare its original and novel aligned Kravchuk spectrograms reproducing `Figure 1` of the paper. Also enable to rotate the signals.*
 
