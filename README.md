@@ -23,7 +23,7 @@ Three demonstration notebooks are provided:
 
 > *Loads a real recording of bat call used for echolocation and compare its Kravchuk and Fourier spectrograms reproducing `Figure 5` of the paper.*
 
-- [`kravchuk-aligned-signal`](notebooks/kravchuk-aligned-signal.ipynb)
+- [`kravchuk-aligned-signal`](notebooks/kravchuk-aligned-transform.ipynb)
 
 > *Generate an elementary signal and compare its original and novel aligned Kravchuk spectrograms reproducing `Figure 1` of the paper if the signal is chosen to be the **chirp** with `snr = Inf`.
 > Compare the computational load of the original and the novel aligned Kravchuk transform as reported in `Figure 3` (top).
