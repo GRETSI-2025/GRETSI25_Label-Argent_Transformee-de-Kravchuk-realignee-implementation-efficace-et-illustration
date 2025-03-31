@@ -6,7 +6,7 @@
 
 This project contains the Python code associated to the paper
 
-> **Pascal, B.**, Flamant, J. & Bardenet, R. (2025). ``*Transformée de Kravchuk réalignée, implémentation efficace et illustrations sur quelques signaux élémentaires*". Submitted.  [[pdf]](paper/2025-kravchuk-ssht-hal.pdf)  
+> **Pascal, B.**, Flamant, J. & Bardenet, R. (2025). ``*Transformée de Kravchuk réalignée, implémentation efficace et illustration sur signaux élémentaires et réels*". Submitted.  [[pdf]](paper/2025-kravchuk-ssht-hal.pdf)  
 >  [hal-05013793](https://hal.science/hal-05013793)
 
 ## Project description
