@@ -92,4 +92,4 @@ You're now ready to compute Kravchuk transforms! 🚀
 
 [2] **Pascal, B.**, & Bardenet, R. (2022, September). Une famille de représentations covariantes de signaux discrets et son application à la détection de signaux à partir de leurs zéros. *GRETSI’22 XXVIIIème Colloque Francophone De Traitement Du Signal Et Des Images*. [hal-03614725](https://hal.archives-ouvertes.fr/hal-03614725/document)
 
-[3] **Pascal, B.**, Flamant J., & Bardenet, R. (2025). Transformée de Kravchuk réalignée, implémentation efficace et illustration sur signaux élémentaires et réels. *Submitted*. [hal-](https://hal.archives-ouvertes.fr/)
+[3] **Pascal, B.**, Flamant J., & Bardenet, R. (2025). Transformée de Kravchuk réalignée, implémentation efficace et illustration sur signaux élémentaires et réels. *Submitted*. [hal-05013793](https://hal.science/hal-05013793)
