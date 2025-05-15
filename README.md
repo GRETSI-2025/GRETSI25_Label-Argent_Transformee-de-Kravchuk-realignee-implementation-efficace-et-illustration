@@ -83,6 +83,10 @@ Follow these steps:
    pip install -r requirements.txt
    ```
 
+### Font handling and rendering with LaTeX
+
+The displays of signals and Kravchuk spectrogram leverages the ability of [`matplotlib`](https://matplotlib.org/) to render text using LaTeX. Instructions are provided in the documentation on [matplotlib backends](https://matplotlib.org/stable/install/dependencies.html#optional-dependencies) and [text rendering with LaTeX](https://matplotlib.org/stable/users/explain/text/usetex.html).
+
 You're now ready to compute Kravchuk transforms! 🚀
 
 
