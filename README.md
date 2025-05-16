@@ -1,6 +1,5 @@
 [![](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![](https://img.shields.io/badge/poetry-v2.+-blue.svg)](https://python-poetry.org/)
-
 [![Poetry](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-poetry.yml)
 [![Requirements.txt](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml/badge.svg?branch=main)](https://github.com/bpascal-fr/from-kravchuk-to-ssht/actions/workflows/install-with-requirements.yml)
 
