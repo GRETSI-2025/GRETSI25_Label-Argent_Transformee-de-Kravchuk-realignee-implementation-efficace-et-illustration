@@ -5,6 +5,15 @@
 
 # A novel aligned Kravchuk transform based on Spin Spherical Harmonics Transform
 
+<hr>
+
+**_Dépôt labelisé dans le cadre du [Label Reproductible du GRESTI'25](https://gretsi.fr/colloque2025/recherche-reproductible/)_**
+
+| Label décerné | Auteur | Rapporteur | Éléments reproduits | Liens |
+|:-------------:|:------:|:----------:|:-------------------:|:------|
+| ![](label_argent.png) | Barbara PASCAL<br>[@bpascal-fr](https://github.com/bpascal-fr) | Mathilde DUPOUY<br>[@MathildeDupouy](https://github.com/MathildeDupouy) |  Figures 1, 3, 4 et 5 | 📌&nbsp;[Dépôt&nbsp;original](https://github.com/bpascal-fr/from-kravchuk-to-ssht)<br>⚙️&nbsp;[Issue](https://github.com/GRETSI-2025/Label-Reproductible/issues/24)<br>📝&nbsp;[Rapport](https://github.com/akrah/test/tree/main/rapports/Rapport_issue_24) |
+
+<hr>
 
 This project contains the Python code associated to the paper
 
