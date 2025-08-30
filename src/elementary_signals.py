@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import scipy.special as special
 import cmocean
 
+# LOAD FUNCTIONS TO PERFORM EXPERIMENTS ON ELEMENTARY SIGNALS
+
+import time
+from pkravchuk_transform import the_ptransform
+from ssht_transform import the_new_transform, the_inverse_transform, the_spherical_angles
 
 # HANDLE APPEARANCE OF THE PLOTS
 
@@ -316,3 +321,202 @@ def display_signal(nsignal, time_t=np.array([]), yticks=True):
     plt.tight_layout()
 
     return time_t
+
+
+# EXPERIMENTS TO EVALUATE COMPUTING TIME AND PRECISION
+
+
+def time_and_precision(N = [256], R = 1, observe = 20, type = 'chirp', param = 15, snr = np.inf,calc = 'time-and-precision'):
+    """
+    Evaluate the computing time and reconstruction precision of the original and aligned transforms depending on signal size.
+
+    Args:
+        - N (list of integers, optional): sizes of signals to be explored.
+        - R (integer,optional): number of realizations.
+        - observe (float, optional): total duration of the observation window (default: 20 seconds).
+        - type (string, optional): type of signal to be considered (default: chirp).
+        - param (float, optional): parameter of the signal (default: duration of 15 seconds).
+        - snr (float, optional): signal-to-noisy ratio (nonnegative, if Inf no noise).
+        - calc (string, optional): either compute only time, only precision or both time and precision
+
+    Returns:
+        - to_signal (numpy.ndarray): mean and confidence interval of computing time of the original transform
+        - tn_signal (numpy.ndarray): mean and confidence interval of computing time of the new aligned transform
+        - ser_signal (numpy.ndarray): mean and confidence interval of signal-to-error ratio if calc indicates to compute time and precision
+
+    """
+
+    if calc == 'time':
+        dotime  =  True
+        doprec  =  False
+    elif calc == 'precision':
+        dotime  =  False
+        doprec  =  True
+    elif calc == 'time-and-precision':
+        dotime  =  True
+        doprec  =  True
+    else:
+        raise NameError("Type of signal not implemented")
+
+        
+    # computational time
+    torigin = np.zeros((len(N),R))
+    tnew    = np.zeros((len(N),R))
+
+    if doprec :
+        # precision
+        prec    = np.zeros((len(N),R))
+
+    for (i,n) in enumerate(N):
+
+        # common grid of spherical angles on which to compute the Kravchuk transform
+        (thetas, phis) = the_spherical_angles(n)
+
+        if type == 'Dirac':
+                
+            for r in range(R):
+
+                
+                # generate signal
+                signal,_     = the_noisy_dirac(n,observe = observe, location = param, snr = snr)
+
+                if dotime:
+                    if n <= 1024:
+                        # compute the original and aligned Kravchul transform
+                        ti_origin    = time.time()  
+                        Ks, _,_      = the_ptransform(signal,1/2,thetas[:-1],phis+np.pi)
+                        tf_origin    = time.time()  
+        
+                        # store computational time
+                        dt_origin    = tf_origin - ti_origin
+                        torigin[i,r] = dt_origin
+
+                # compute the novel aligned Kravchuk transform of the signal
+                ti_new       = time.time()  
+                Fs,_,_       = the_new_transform(signal)
+                tf_new       = time.time()  
+                dt_new       = tf_new - ti_new
+                tnew[i,r]    = dt_new
+
+                if doprec :
+                    # compute the inverse of the Kravchuk transform
+                    isignal      = the_inverse_transform(Fs,n)
+        
+                    # compute the reconstruction error
+                    prec[i,r]    = 1 / np.linalg.norm(isignal-signal,ord = 2)
+
+            if R > 1:
+                print('Finished R = ' + str(R) + ' realizations of signals of size N = ' + str(n) + '.')
+            else:
+                print('Finished R = ' + str(R) + ' realization of signals of size N = ' + str(n) + '.')
+        
+        elif type == 'sine':
+
+            for r in range(R):
+                
+                # generate signal
+                signal,_     = the_noisy_sine(n,observe = observe, frequency = param, snr = snr)
+
+                if dotime:
+                    if n <= 1024:
+                        # compute the original and aligned Kravchul transform
+                        ti_origin    = time.time()  
+                        Ks, _,_      = the_ptransform(signal,1/2,thetas[:-1],phis+np.pi)
+                        tf_origin    = time.time()  
+        
+                        # store computational time
+                        dt_origin    = tf_origin - ti_origin
+                        torigin[i,r] = dt_origin
+
+                # compute the novel aligned Kravchuk transform of the signal
+                ti_new       = time.time()  
+                Fs,_,_       = the_new_transform(signal)
+                tf_new       = time.time()  
+                dt_new       = tf_new - ti_new
+                tnew[i,r]    = dt_new
+
+                if doprec :
+                    # compute the inverse of the Kravchuk transform
+                    isignal      = the_inverse_transform(Fs,n)
+    
+                    # compute the reconstruction error
+                    prec[i,r]    = 1 / np.linalg.norm(isignal-signal,ord = 2)
+
+            if R > 1:
+                print('Finished R = ' + str(R) + ' realizations of signals of size N = ' + str(n) + '.')
+            else:
+                print('Finished R = ' + str(R) + ' realization of signals of size N = ' + str(n) + '.')
+            
+        elif type == 'chirp':
+
+            for r in range(R):
+                
+                # generate signal
+                signal,_     = the_noisy_chirp(n,observe = observe, duration = param, snr = snr)
+
+                if dotime:
+                    if n <= 1024:
+                        # compute the original and aligned Kravchul transform
+                        ti_origin    = time.time()  
+                        Ks, _,_      = the_ptransform(signal,1/2,thetas[:-1],phis+np.pi)
+                        tf_origin    = time.time()  
+        
+                        # store computational time
+                        dt_origin    = tf_origin - ti_origin
+                        torigin[i,r] = dt_origin
+
+                # store computational time
+                dt_origin    = tf_origin - ti_origin
+                torigin[i,r] = dt_origin
+
+                # compute the novel aligned Kravchuk transform of the signal
+                ti_new       = time.time()  
+                Fs,_,_       = the_new_transform(signal)
+                tf_new       = time.time()  
+                dt_new       = tf_new - ti_new
+                tnew[i,r]    = dt_new
+
+                if doprec :
+                    # compute the inverse of the Kravchuk transform
+                    isignal      = the_inverse_transform(Fs,n)
+    
+                    # compute the reconstruction error
+                    prec[i,r]    = 1 / np.linalg.norm(isignal-signal,ord = 2)
+
+            if R > 1:
+                print('Finished R = ' + str(R) + ' realizations of signals of size N = ' + str(n) + '.')
+            else:
+                print('Finished R = ' + str(R) + ' realization of signals of size N = ' + str(n) + '.')
+        
+        else:
+        
+            raise NameError("Type of signal not implemented")
+
+    # store means and confidence intervals
+    if dotime:
+        to_signal  = np.zeros((2,len(N)))
+        tn_signal  = np.zeros((2,len(N)))
+    if doprec :
+        ser_signal = np.zeros((2,len(N)))
+    
+    # compute the mean over all realizations
+    if dotime:
+        to_signal[0,:]  = np.mean(torigin,axis = 1)
+        tn_signal[0,:]  = np.mean(tnew,axis = 1)
+    if doprec :
+        ser_signal[0,:] = np.mean(prec,axis = 1)
+
+    if R > 1:
+        if dotime:
+            # compute the 95% Gaussian confidence interval over all realizations
+            to_signal[1,:]  = 1.96 / np.sqrt(R) *np.std(torigin,axis = 1)
+            tn_signal[1,:]  = 1.96 / np.sqrt(R) *np.std(tnew,axis = 1)
+        if doprec :
+            ser_signal[1,:] = 1.96 / np.sqrt(R) *np.std(prec,axis = 1)
+
+    if calc == 'time-and-precision':
+        return to_signal, tn_signal, ser_signal
+    elif calc == 'precision':
+        return ser_signal
+    elif calc == 'time':
+        return to_signal, tn_signal
